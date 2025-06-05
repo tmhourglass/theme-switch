@@ -49,7 +49,8 @@
 
 ;;; 键绑定设置
 ;; 基本主题切换
-(global-set-key (kbd "C-c t r") 'theme-switch-random)     ;; 随机切换主题
+(global-set-key (kbd "C-c t r") 'theme-switch-random-favorites)     ;; 随机切换收藏主题
+(global-set-key (kbd "C-c t R") 'theme-switch-random-available)     ;; 随机切换所有主题
 (global-set-key (kbd "C-c t p") 'theme-switch-previous)   ;; 切换到上一个主题
 (global-set-key (kbd "C-c t l") 'theme-switch-load-theme) ;; 从列表中选择主题
 

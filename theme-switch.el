@@ -123,6 +123,11 @@ except those in `theme-switch-excluded-themes'."
       theme-switch-favorite-themes
     (cl-set-difference (custom-available-themes) theme-switch-excluded-themes)))
 
+(defun theme-switch--get-available-themes ()
+  "Get the list of all available themes.
+  Except those in `theme-switch-excluded-themes'."
+  (cl-set-difference (custom-available-themes) theme-switch-excluded-themes)
+
 (defun theme-switch--random-theme (themes)
   "Select a random theme from THEMES."
   (nth (random (length themes)) themes))
@@ -174,10 +179,19 @@ except those in `theme-switch-excluded-themes'."
 
     (message "Loaded theme: %s" theme)))
 
-(defun theme-switch-random ()
-  "Load a random theme."
+(defun theme-switch-random-favorites ()
+  "Load a random theme from favorites list.
+If favorites list is empty, use all available themes except excluded ones."
   (interactive)
   (let* ((themes (theme-switch--get-favorite-themes))
+         (theme (theme-switch--random-theme themes)))
+    (theme-switch-load-theme theme)))
+
+(defun theme-switch-random-available ()
+  "Load a random theme from all available themes.
+This ignores excluded lists."
+  (interactive)
+  (let* ((themes (theme-switch--get-available-themes))
          (theme (theme-switch--random-theme themes)))
     (theme-switch-load-theme theme)))
 
@@ -339,7 +353,8 @@ If THEME is nil, prompt for a theme."
 (defvar theme-switch-command-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "l") 'theme-switch-load-theme)
-    (define-key map (kbd "r") 'theme-switch-random)
+    (define-key map (kbd "r") 'theme-switch-random-favorites)
+    (define-key map (kbd "R") 'theme-switch-random-available)
     (define-key map (kbd "p") 'theme-switch-previous)
     (define-key map (kbd "d") 'theme-switch-day-mode)
     (define-key map (kbd "n") 'theme-switch-night-mode)
@@ -362,7 +377,8 @@ If THEME is nil, prompt for a theme."
   (let ((choice (read-char-choice
                 "Theme Switching Commands:
 l: Load theme
-r: Random theme
+r: Random theme from favorites
+R: Random theme from all available
 p: Previous theme
 d: Day mode
 n: Night mode
@@ -376,7 +392,7 @@ f: List favorites
 x: List excluded
 q: Quit
 "
-                '(?l ?r ?p ?d ?n ?e ?a ?t ?v ?+ ?- ?f ?x ?q))))
+                '(?l ?r ?R ?p ?d ?n ?e ?a ?t ?v ?+ ?- ?f ?x ?q))))
     (unless (eq choice ?q)
       (let ((cmd (lookup-key theme-switch-command-map (char-to-string choice))))
         (when cmd
