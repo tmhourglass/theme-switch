@@ -126,7 +126,7 @@ except those in `theme-switch-excluded-themes'."
 (defun theme-switch--get-available-themes ()
   "Get the list of all available themes.
   Except those in `theme-switch-excluded-themes'."
-  (cl-set-difference (custom-available-themes) theme-switch-excluded-themes)
+  (cl-set-difference (custom-available-themes) theme-switch-excluded-themes))
 
 (defun theme-switch--random-theme (themes)
   "Select a random theme from THEMES."
