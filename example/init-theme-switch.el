@@ -1,12 +1,11 @@
-;;; examples.el --- Theme Switch 示例配置
+;;; init-theme-switch.el --- Theme Switch 示例配置
 
 ;;; Commentary:
-;; 这个文件包含了 theme-switch.el 的几个常用配置示例。
+;; 这个文件包含了 theme-switch.el 的全部配置。
 ;; 你可以复制这些配置到你的 Emacs 配置文件中，并根据需要进行修改。
 
 ;;; Code:
 
-;; 基本配置示例
 (require 'theme-switch)
 
 ;;; 主题设置
@@ -80,4 +79,6 @@
 ;;; 启动时根据当前时间自动选择模式（可选）
 (theme-switch-auto)
 
-;;; examples.el ends here
+(provide 'init-theme-switch)
+
+;;; init-theme-switch.el ends here
