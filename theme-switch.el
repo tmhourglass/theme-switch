@@ -160,7 +160,7 @@ except those in `theme-switch-excluded-themes'."
   "Load the specified THEME."
   (interactive
    (list (intern (completing-read "Select theme: "
-                                 (mapcar #'symbol-name (theme-switch--get-favorite-themes))
+                                 (mapcar #'symbol-name (theme-switch--get-available-themes))
                                  nil t))))
   (when theme
     ;; Run pre-load hooks
@@ -364,8 +364,8 @@ If THEME is nil, prompt for a theme."
     (define-key map (kbd "v") 'theme-switch-preview)
     (define-key map (kbd "+") 'theme-switch-add-to-favorites)
     (define-key map (kbd "-") 'theme-switch-remove-from-favorites)
-    (define-key map (kbd "x+") 'theme-switch-add-to-excluded)
-    (define-key map (kbd "x-") 'theme-switch-remove-from-excluded)
+    (define-key map (kbd "]") 'theme-switch-add-to-excluded)
+    (define-key map (kbd "[") 'theme-switch-remove-from-excluded)
     (define-key map (kbd "f") 'theme-switch-list-favorites)
     (define-key map (kbd "x") 'theme-switch-list-excluded)
     map)
@@ -388,6 +388,8 @@ t: Toggle auto mode
 v: Preview themes
 +: Add current to favorites
 -: Remove from favorites
+]: Add current to excluded
+[: Remove from excluded
 f: List favorites
 x: List excluded
 q: Quit
