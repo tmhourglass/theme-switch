@@ -1,0 +1,92 @@
+# Theme Switch
+
+一个用于 Emacs 的主题切换工具，提供以下功能：
+
+1. 维护喜欢的主题列表
+2. 随机切换主题，并可添加到收藏夹
+3. 基于时间的护眼模式自动切换（日间/夜间模式）及一键切换
+4. 使用 consult-theme 进行主题预览
+
+## 安装
+
+### 手动安装
+
+1. 下载 `theme-switch.el` 文件
+2. 将其放置在 Emacs 的 load-path 中
+3. 在你的 Emacs 配置文件中添加：
+
+```elisp
+(require 'theme-switch)
+```
+
+### 最小化配置示例
+
+如果你只想快速启动并尝试基本功能，可以使用以下最小化配置：
+
+```elisp
+;; 加载 theme-switch
+(require 'theme-switch)
+
+;; 启用主题切换模式（使用默认设置）
+(theme-switch-mode 1)
+
+;; 设置一个快捷键来显示主题菜单
+(global-set-key (kbd "C-c t") 'theme-switch-menu)
+```
+
+这个最小化配置将使用所有可用的主题（除了 'user'），并提供一个快捷键 `C-c t` 来访问主题菜单，从而可以使用所有功能。
+
+详细的配置示例请参考 `example/examples.el` 文件
+
+你可以直接调用这些函数，或者参考它们的实现来配置你自己的设置。
+
+## 使用方法
+
+### 交互命令
+
+- `M-x theme-switch-load-theme` - 从喜欢的主题列表中选择一个主题
+- `M-x theme-switch-random` - 随机选择一个主题
+- `M-x theme-switch-day-mode` - 切换到日间模式
+- `M-x theme-switch-night-mode` - 切换到夜间模式
+- `M-x theme-switch-toggle-eye-care` - 在日间、夜间和关闭模式之间切换
+- `M-x theme-switch-auto` - 根据当前时间自动选择模式
+- `M-x theme-switch-previous` - 切换到上一个使用的主题
+- `M-x theme-switch-toggle-auto-switch` - 切换是否启用自动主题切换
+- `M-x theme-switch-preview` - 使用 consult-theme 预览主题
+- `M-x theme-switch-menu` - 显示所有主题切换命令的菜单
+- `M-x theme-switch-add-to-favorites` - 将当前主题添加到收藏夹
+- `M-x theme-switch-remove-from-favorites` - 从收藏夹中删除主题
+- `M-x theme-switch-add-to-excluded` - 将主题添加到排除列表
+- `M-x theme-switch-remove-from-excluded` - 从排除列表中删除主题
+- `M-x theme-switch-list-favorites` - 列出所有收藏的主题
+- `M-x theme-switch-list-excluded` - 列出所有排除的主题
+
+### 推荐的键绑定
+
+建议的键绑定示例（详见 `example/examples.el`）：
+
+```elisp
+(global-set-key (kbd "C-c t r") 'theme-switch-random)      ;; 随机切换主题
+(global-set-key (kbd "C-c t e") 'theme-switch-toggle-eye-care) ;; 切换护眼模式
+(global-set-key (kbd "C-c t m") 'theme-switch-menu)        ;; 主题菜单
+(global-set-key (kbd "C-c t +") 'theme-switch-add-to-favorites) ;; 添加到收藏夹
+(global-set-key (kbd "C-c t -") 'theme-switch-remove-from-favorites) ;; 从收藏夹删除
+```
+
+## 自定义钩子
+
+theme-switch 提供了两个钩子，可以在主题加载前后执行自定义操作：
+
+- `theme-switch-before-load-theme-hook` - 主题加载前执行
+- `theme-switch-after-load-theme-hook` - 主题加载后执行
+
+钩子函数接收一个参数：主题名称（符号）。使用示例请参考 `example/examples.el` 中的 `theme-switch-example-hooks` 函数。
+
+## 系统要求
+
+- Emacs 25.1 或更高版本
+- 主题预览功能需要安装 consult 包
+
+## 许可证
+
+本项目采用 GPL-3.0 许可证 - 详见 LICENSE 文件
