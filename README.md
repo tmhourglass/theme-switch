@@ -86,7 +86,7 @@ theme-switch 提供了多种主题切换方式，每种方式的行为略有不�
 ### 交互命令
 
 - `M-x theme-switch-load-theme` - 从可用的主题列表中选择一个主题
-- `M-x theme-switch-random` - 从收藏主题列表中随机选择一个主题
+- `M-x theme-switch-random-favorites` - 从收藏主题列表中随机选择一个主题
 - `M-x theme-switch-random-available` - 从所有可用主题中随机选择一个主题
 - `M-x theme-switch-day-mode` - 切换到日间模式
 - `M-x theme-switch-night-mode` - 切换到夜间模式
@@ -108,7 +108,7 @@ theme-switch 提供了多种主题切换方式，每种方式的行为略有不�
 建议的键绑定示例（详见 `example/examples.el`）：
 
 ```elisp
-(global-set-key (kbd "C-c t r") 'theme-switch-random)      ;; 从收藏中随机切换主题
+(global-set-key (kbd "C-c t r") 'theme-switch-random-favorites)      ;; 从收藏中随机切换主题
 (global-set-key (kbd "C-c t R") 'theme-switch-random-available) ;; 从所有主题中随机切换
 (global-set-key (kbd "C-c t e") 'theme-switch-toggle-eye-care) ;; 切换护眼模式
 (global-set-key (kbd "C-c t m") 'theme-switch-menu)        ;; 主题菜单
